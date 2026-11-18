@@ -42,6 +42,14 @@
 - 快捷键只作加速器：每个快捷键功能都必须有可见入口（搜索框常驻顶栏，不藏在 `Ctrl+K` 后面）。
 - 动效 120–200ms，`cubic-bezier(0.2, 0, 0, 1)`；禁止弹跳。
 
+## 图标与打包资源
+
+- 图标是设计稿资产，不是代码产物：**不要写生成/重绘图标的脚本**。曾有的 `tools/make-icon.mjs` 会重算出旧蓝色图标并覆盖资源，已删除；换图标只替换下面三份文件，保持原比例与透明底，不做拉伸或重编码。
+- 三份文件的职责固定：`resources/app-icon.png` 是唯一运行时图标源（透明底大图）；`build/icon.ico` 供 `electron-builder.yml` 的 `win.icon`（exe、安装包、快捷方式都取这里，需含 16/32/48/256 等尺寸帧）；`build/icon.png` 供非 Windows 目标。
+- 运行时只经 `src/main/app-icon.ts` 取图：`appIconPath()` 依次尝试 `out/main/../../resources`（开发）、`process.resourcesPath`（打包后由 `extraResources` 放置）、`app.getAppPath()/resources`；新建 `BrowserWindow` 必须传 `icon: appIconPath()`，托盘用 `appIconImage(16)`。不要在各处再写路径探测。
+- 单独为托盘准备小图没有收益：Electron 对 ICO 只取单帧，直接从大图 `resize` 与 ICO 内的 16px 帧视觉一致。
+- 验证：`npm run pack:dir` 后确认 `release/win-unpacked/resources/app-icon.png` 存在，且 `release/win-unpacked/Jot.exe` 内含 ICO 各尺寸帧（逐帧字节比对即可）。
+
 ## 备份与密钥
 
 - COS 只当哑存储：`db/` 放滚动快照（保留 10 份），`images/` 放按 sha256 命名的原图，`backup_objects` 表记录已上传对象避免重传。
