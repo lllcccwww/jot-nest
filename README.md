@@ -40,16 +40,18 @@ npm run dist         # 打包 NSIS 安装包 + 便携版（输出到 release/）
 
 自动更新需要 COS 上一个**公开读**的前缀放 `latest.yml` 与安装包，并把该地址填到设置页「更新源」。未签名安装包首次运行会触发 SmartScreen 提示。
 
-## 当前部署（已配置好）
+## 部署形态
 
-| 项 | 值 |
+配置全部存在本机，仓库里没有任何桶名、域名或凭据：
+
+| 项 | 填什么 |
 | --- | --- |
-| 存储桶 | `jot-nest-1310000435`（ap-guangzhou） |
-| 备份前缀 | `jot/`（`db/` 滚动保留 10 份快照，`images/` 按 sha256 存原图） |
-| 更新源 | `https://jot-nest-1310000435.cos.ap-guangzhou.myqcloud.com/updates/` |
+| 存储桶 / 地域 | 你自己的 COS 桶（如 `<bucket>-<appid>` / `ap-guangzhou`） |
+| 备份前缀 | 默认 `jot/`：`db/` 滚动保留 10 份快照，`images/` 按 sha256 存原图 |
+| 更新源 | `<bucket>.cos.<region>.myqcloud.com/updates/`（留空则不检查更新） |
 | 密钥存放 | `%APPDATA%\jot-nest\settings.json`，`safeStorage`（DPAPI）加密，**不进仓库** |
 
-`updates/` 下的 `latest.yml`、`Jot-Setup-<version>.exe`、`.blockmap` 以对象级 `public-read` 上传，`latest.yml` 与安装包已匿名验证可读（支持 Range）。发新版时重新构建并覆盖这三个对象即可。
+启用自动更新时，`updates/` 下的 `latest.yml`、`Jot-Setup-<version>.exe`、`.blockmap` 用对象级 `public-read` 上传即可，不必把整个桶改成公共读（备份前缀保持私有）。未签名安装包首次运行会触发 SmartScreen 提示。
 
 辅助脚本：
 
