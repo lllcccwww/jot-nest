@@ -298,7 +298,7 @@ export function SettingsDialog({
                 />
               </div>
             </div>
-            <div className="hint">该地址需公开可读；未签名安装包首次运行会触发 SmartScreen 提示。</div>
+            <div className="hint">留空表示不检查更新。填你自己的分发地址（需公开可读）后才会启用；未签名安装包首次运行会触发 SmartScreen 提示。</div>
           </section>
 
           <section className="section">
