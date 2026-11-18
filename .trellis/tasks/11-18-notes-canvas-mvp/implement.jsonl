@@ -1,0 +1,5 @@
+{"file": ".trellis/spec/frontend/ipc-electron.md", "reason": "IPC 与无边框标题栏约定"}
+{"file": ".trellis/spec/frontend/css-design.md", "reason": "设计 token 与样式组织"}
+{"file": ".trellis/spec/backend/directory-structure.md", "reason": "主进程目录与模块划分"}
+{"file": ".trellis/spec/backend/database.md", "reason": "数据持久化约定"}
+{"file": ".trellis/spec/shared/typescript.md", "reason": "TypeScript 约定"}

@@ -1,0 +1,161 @@
+body.capture-body {
+  background: transparent;
+  overflow: hidden;
+}
+
+.capture-root {
+  padding: 6px;
+}
+
+.capture-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px 12px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  border: 1px solid var(--border-strong);
+  box-shadow:
+    0 24px 60px -20px rgba(0, 0, 0, 0.45),
+    0 4px 14px rgba(0, 0, 0, 0.12);
+}
+
+.capture-head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  -webkit-app-region: drag;
+}
+
+.capture-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.capture-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.capture-hint {
+  font-size: 10.5px;
+  color: var(--text-faint);
+  font-feature-settings: 'tnum';
+}
+
+.capture-input {
+  width: 100%;
+  min-height: 62px;
+  max-height: 300px;
+  resize: none;
+  font-size: 13.5px;
+  line-height: 1.66;
+  color: var(--text);
+  user-select: text;
+  overflow: auto;
+}
+
+.capture-input::placeholder {
+  color: var(--text-faint);
+}
+
+.capture-image {
+  position: relative;
+  align-self: flex-start;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+}
+
+.capture-image img {
+  display: block;
+  max-height: 132px;
+  max-width: 300px;
+  object-fit: contain;
+}
+
+.capture-image-remove {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(6px);
+}
+
+.capture-image-remove:hover {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.capture-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.capture-tags {
+  width: 108px;
+  height: 26px;
+  padding: 0 9px;
+  border-radius: var(--radius-xs);
+  background: var(--surface-muted);
+  border: 1px solid transparent;
+  font-size: 11.5px;
+  user-select: text;
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.capture-tags:focus {
+  border-color: var(--border-strong);
+  background: var(--surface);
+}
+
+.capture-tags::placeholder {
+  color: var(--text-faint);
+}
+
+.capture-save {
+  margin-left: auto;
+  height: 28px;
+  padding: 0 16px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
+}
+
+.capture-save:hover {
+  opacity: 0.9;
+}
+
+.capture-save:active {
+  transform: scale(0.98);
+}
+
+.capture-save:disabled {
+  background: var(--surface-hover);
+  color: var(--text-faint);
+  cursor: not-allowed;
+}
+
+.capture-save.located {
+  background: var(--text);
+  color: var(--bg-elevated);
+}

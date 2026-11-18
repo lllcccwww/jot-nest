@@ -1,0 +1,33 @@
+appId: com.linchengwei.jot
+productName: Jot
+copyright: Copyright © 2026 linchengwei
+directories:
+  buildResources: build
+  output: release
+files:
+  - out/**/*
+  - package.json
+  - '!**/*.map'
+asar: true
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+    - target: portable
+      arch: [x64]
+  icon: build/icon.ico
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  shortcutName: Jot
+  artifactName: Jot-Setup-${version}.exe
+portable:
+  artifactName: Jot-${version}-portable.exe
+publish:
+  provider: generic
+  url: https://placeholder.invalid/updates/
+extraResources:
+  - from: resources
+    to: .
