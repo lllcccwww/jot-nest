@@ -1,23 +1,10 @@
 import { app, Menu, Tray, nativeImage } from 'electron'
-import { existsSync } from 'node:fs'
-import { join } from 'node:path'
 import type { BackupState } from '@shared/types'
+import { appIconImage } from './app-icon'
 import { openCaptureWindow, setQuitting, showMainWindow } from './windows'
 
 let tray: Tray | null = null
 let lastBackup: BackupState = { status: 'idle' }
-
-function trayIconPath(): string {
-  const candidates = [
-    join(__dirname, '../../resources/tray.png'),
-    join(process.resourcesPath ?? '', 'tray.png'),
-    join(app.getAppPath(), 'resources', 'tray.png')
-  ]
-  for (const candidate of candidates) {
-    if (existsSync(candidate)) return candidate
-  }
-  return ''
-}
 
 function backupLabel(state: BackupState): string {
   switch (state.status) {
@@ -36,9 +23,7 @@ function backupLabel(state: BackupState): string {
 
 export function createTray(handlers: { onBackupNow: () => void }): void {
   if (tray) return
-  const iconPath = trayIconPath()
-  const image = iconPath ? nativeImage.createFromPath(iconPath) : nativeImage.createEmpty()
-  tray = new Tray(image.isEmpty() ? nativeImage.createEmpty() : image.resize({ width: 16, height: 16 }))
+  tray = new Tray(appIconImage(16) ?? nativeImage.createEmpty())
   tray.setToolTip('Jot — 随手记')
   tray.on('click', () => {
     showMainWindow()

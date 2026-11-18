@@ -1,5 +1,6 @@
 import { join } from 'node:path'
 import { BrowserWindow, screen } from 'electron'
+import { appIconPath } from './app-icon'
 
 const DEV_URL = process.env['ELECTRON_RENDERER_URL']
 const PRELOAD = join(__dirname, '../preload/index.js')
@@ -36,6 +37,7 @@ export function createMainWindow(): BrowserWindow {
     frame: false,
     backgroundColor: '#F4F4F1',
     title: 'Jot',
+    icon: appIconPath(),
     webPreferences: {
       preload: PRELOAD,
       contextIsolation: true,

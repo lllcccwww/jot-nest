@@ -14,8 +14,7 @@
     "start": "electron-vite preview",
     "pack:dir": "electron-vite build && electron-builder --dir",
     "dist": "electron-vite build && electron-builder --win",
-    "verify": "node tools/verify.mjs",
-    "icon": "node tools/make-icon.mjs"
+    "verify": "node tools/verify.mjs"
   },
   "dependencies": {
     "cos-nodejs-sdk-v5": "^2.14.7",
